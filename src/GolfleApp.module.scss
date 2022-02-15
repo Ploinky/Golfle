@@ -1,0 +1,31 @@
+:global(body) {
+    font-size: min(5vw, 5vh);
+    padding: 0;
+    margin: 0;
+    font-family: monospace;
+}
+
+.layout {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 2px solid black;
+}
+
+.header h1,
+.header a,
+.header h4{
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    text-decoration: none;
+    color: black;
+}

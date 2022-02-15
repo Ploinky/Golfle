@@ -1,0 +1,81 @@
+
+.golfle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: min(5vw, 5vh);
+    font-family: monospace;
+    flex-grow: 1;
+}
+
+.golfle h1,
+.golfle h3 {
+    padding: 0;
+    margin: 0;
+}
+
+.par {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1em;
+    width: 1em;
+    margin: 0.1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.guess {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.num {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1em;
+    width: 1em;
+    margin: 0.1em;
+    border-radius: 10%;
+
+    &Wrong {
+        @extend .num;
+        background-color: red;
+        
+    }
+    
+    &Correct {
+        @extend .num;
+        background-color: green;
+    }
+    
+    &AlmostCorrect {
+        @extend .num;
+        background-color: yellow;
+    }
+}
+
+.winBox {
+    position: absolute;
+    left: 25vw;
+    width: 50vw;
+    border-radius: 1vh;
+    border: 3px solid black;
+    background-color: gray;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2em 0em;
+}
+
+.winBox button {
+    font-size: 1em;
+    margin-top: 0.6em;
+}
