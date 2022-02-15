@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styles from './Golfle.module.scss'
+import KeyBoard from './KeyBoard.js'
 
 const SCORE_COUNT = 9;
 const GUESS_COUNT = 6;
@@ -35,35 +36,39 @@ function Golfle() {
     win = PLAYING;
   }
 
+  function keyPressed(key) {
+    // Delete a letter
+    if(key === 'Backspace') {
+      setGuess((prev) => {
+        const temp = [...prev];
+        temp.pop();
+        return temp;
+      });
+      return;
+    }
+
+    // Submit input
+    if(key === 'Enter' && guess.length === SCORE_COUNT) {
+      setSubmittedGuesses(p => [...p, guess]);
+      setGuess([]);
+      return;
+    }
+
+    // Check if input is a number
+    if(!isFinite(key)) {
+      // Ignore anything that is not a number
+      return;
+    }
+      
+    if(guess.length < SCORE_COUNT) {
+      setGuess((prev) => [...prev, parseInt(key)]);
+    }
+  }
+
   // Listen for user key down
   useEffect(() => {
     function handleKeyDown({key}) {
-      // Delete a letter
-      if(key === 'Backspace') {
-        setGuess((prev) => {
-          const temp = [...prev];
-          temp.pop();
-          return temp;
-        });
-        return;
-      }
-  
-      // Submit input
-      if(key === 'Enter' && guess.length === SCORE_COUNT) {
-        setSubmittedGuesses(p => [...p, guess]);
-        setGuess([]);
-        return;
-      }
-  
-      // Check if input is a number
-      if(!isFinite(key)) {
-        // Ignore anything that is not a number
-        return;
-      }
-      
-      if(guess.length < SCORE_COUNT) {
-        setGuess((prev) => [...prev, parseInt(key)]);
-      }
+      keyPressed(key);
     };
 
     if(!win) {
@@ -88,6 +93,7 @@ function Golfle() {
         return <FutureGuess key={index}/>;
       }
     })}
+    <KeyBoard keyPressed={keyPressed}/>
     {<RenderWin win={win} submittedGuesses={submittedGuesses}/>}
   </div>
   )

@@ -1,0 +1,26 @@
+.numBtn {
+    font-size: 1.5em;
+    width: 2em;
+    height: 2em;
+    margin: 0.1em;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.container row {
+    flex-grow: 1;
+}
+.row button {
+    flex-grow: 1;
+}
