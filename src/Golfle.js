@@ -5,7 +5,7 @@ import KeyBoard from './KeyBoard.js'
 const SCORE_COUNT = 9;
 const GUESS_COUNT = 6;
 const SOLUTION_COURSE = [3, 4, 4, 5, 4, 5, 3, 4, 4];
-const SOLUTION = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const SOLUTION = [4, 5, 3, 5, 4, 3, 4, 5, 6];
 
 const PLAYING = 0;
 const WON = 1;
