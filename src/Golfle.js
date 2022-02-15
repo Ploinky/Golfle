@@ -107,7 +107,8 @@ function RenderWin({win, submittedGuesses}) {
   }
 
   function copyResult() {
-    let cpy = '';
+    let guessCountFinal = win === WON ? submittedGuesses.length : 'X';
+    let cpy = guessCountFinal + '/' + GUESS_COUNT + ' golfle\n';
 
     for(let index = 0; index < submittedGuesses.length; index++) {
         // Get last guess
@@ -145,7 +146,8 @@ function RenderWin({win, submittedGuesses}) {
         cpy += displaySolution.map(g => g[1] === 0 ?  gray : (g[1] === 1 ? green : yellow)).join('') + '\n';
     }
 
-    navigator.clipboard.writeText(cpy);
+    navigator.clipboard.writeText(cpy).then(() => {"copied result"})
+    .catch(() => {"could not copy!"});
   }
   
 
