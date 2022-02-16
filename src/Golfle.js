@@ -2,10 +2,19 @@ import React, { useEffect, useState, useRef } from 'react';
 import styles from './Golfle.module.scss'
 import KeyBoard from './KeyBoard.js'
 
+const SOLUTION_COURSE = [3, 4, 4, 5, 4, 5, 3, 4, 4];
+
 const SCORE_COUNT = 9;
 const GUESS_COUNT = 6;
-const SOLUTION_COURSE = [3, 4, 4, 5, 4, 5, 3, 4, 4];
-const SOLUTION = [4, 5, 3, 5, 4, 3, 4, 5, 6];
+
+
+let solution = [...SOLUTION_COURSE];
+
+solution.forEach(function(h, index, solution) {
+  solution[index] = solution[index] + Math.floor(Math.random() * 5) - 2
+});
+
+console.log(solution);
 
 const PLAYING = 0;
 const WON = 1;
@@ -14,7 +23,7 @@ const LOST = 2;
 // Main app
 function Golfle() {
   const coursePar = SOLUTION_COURSE.reduce((sum, holePar) => sum + holePar, 0);
-  const score = SOLUTION.reduce((sum, holeScore) => sum + holeScore, 0);
+  const score = solution.reduce((sum, holeScore) => sum + holeScore, 0);
   const [submittedGuesses, setSubmittedGuesses] = useState([]);
   const [guess, setGuess] = useState([]);
 
@@ -25,7 +34,7 @@ function Golfle() {
     win = WON;
     
     submittedGuesses[submittedGuesses.length - 1].forEach((v, i) => {
-      if(v !== SOLUTION[i]) {
+      if(v !== solution[i]) {
         win = LOST;
       }
     });
@@ -113,12 +122,12 @@ function RenderWin({win, submittedGuesses}) {
     for(let index = 0; index < submittedGuesses.length; index++) {
         // Get last guess
         let guess = submittedGuesses[index];
-        const fullSolution = [...SOLUTION_COURSE.map((par, index) => {return [par, SOLUTION[index], false]})];
+        const fullSolution = [...SOLUTION_COURSE.map((par, index) => {return [par, solution[index], false]})];
         const displaySolution = [...guess.map(g => [g, 0])];
     
         // Find correct solutions
         displaySolution.forEach((g, i) => {
-          if(g[0] === SOLUTION[i]) {
+          if(g[0] === solution[i]) {
             g[1] = 1;
             fullSolution[i][2] = true;
           }
@@ -190,12 +199,12 @@ function CurrentGuess({guess}) {
 }
 
 function PreviousGuess({guess}) {
-  const fullSolution = [...SOLUTION_COURSE.map((par, index) => {return [par, SOLUTION[index], false]})];
+  const fullSolution = [...SOLUTION_COURSE.map((par, index) => {return [par, solution[index], false]})];
   const displaySolution = [...guess.map(g => [g, 0])];
 
   // Find correct solutions
   displaySolution.forEach((g, i) => {
-    if(g[0] === SOLUTION[i]) {
+    if(g[0] === solution[i]) {
       g[1] = 1;
       fullSolution[i][2] = true;
     }
