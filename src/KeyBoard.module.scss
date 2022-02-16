@@ -21,6 +21,13 @@
 .container row {
     flex-grow: 1;
 }
+
 .row button {
     flex-grow: 1;
+}
+
+@media screen and (min-width: 789px) {
+    .container {
+        display: none;
+    }
 }
